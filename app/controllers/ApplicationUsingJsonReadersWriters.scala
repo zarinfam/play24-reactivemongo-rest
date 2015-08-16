@@ -63,8 +63,8 @@ with MongoController with ReactiveMongoComponents {
   import models.JsonFormats._
 
   def create = Action.async {
-    val user = User(29, "John", "Smith", List(
-      Feed("Slashdot news", "http://slashdot.org/slashdot.rdf")))
+    val user = User(32, "Saeed", "Zarinfam", List(
+      Feed("javabyab.com news", "http://javabyab.com")))
     // insert the user
     val futureResult = collection.insert(user)
     // when the insert is performed, send a OK 200 result

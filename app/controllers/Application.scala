@@ -63,8 +63,7 @@ class Application @Inject()(val reactiveMongoApi: ReactiveMongoApi)
       "age" -> age,
       "created" -> new java.util.Date().getTime())
 
-    collection.insert(json).map(lastError =>
-      Ok("Mongo LastError: %s".format(lastError)))
+    collection.insert(json).map(le => Ok(Json.obj("success" -> le.ok)))
   }
 
   def createFromJson = Action.async(parse.json) { request =>
@@ -104,7 +103,7 @@ class Application @Inject()(val reactiveMongoApi: ReactiveMongoApi)
 
     // transform the list into a JsArray
     val futurePersonsJsonArray: Future[JsArray] =
-      futurePersonsList.map { persons => Json.arr(persons: _*) }
+      futurePersonsList.map { persons => Json.arr(persons) }
 
     // everything's ok! Let's reply with the array
     futurePersonsJsonArray.map { persons =>

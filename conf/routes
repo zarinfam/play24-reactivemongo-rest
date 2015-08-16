@@ -3,7 +3,17 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET         /                     controllers.Application.index
+
+# use JSON <-> BSON conversion
+GET         /person               controllers.Application.create(name, age: Int)
+POST        /persons              controllers.Application.createFromJson
+GET         /persons/:name        controllers.Application.findByName(name)
+
+# use JSON Writes and Reads
+GET         /v2/person               controllers.ApplicationUsingJsonReadersWriters.create()
+POST        /v2/persons              controllers.Application.createFromJson
+GET         /v2/persons/:name        controllers.Application.findByName(name)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file         controllers.Assets.versioned(path="/public", file: Asset)
